@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="online-store">
+        <createTable tableName="PRODUCT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PRODUCT"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STORE_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="online-store">
+        <createTable tableName="PURCHASE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PURCHASE"/>
+            </column>
+            <column name="STORE_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NUMBER_" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CUSTOMER_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="DECIMAL(19, 2)"/>
+            <column name="STATUS" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="online-store">
+        <createTable tableName="PURCHASE_PRODUCT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PURCHASE_PRODUCT"/>
+            </column>
+            <column name="AMOUNT" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRODUCT_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PURCHASE_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="online-store">
+        <createTable tableName="RETAIL_NETWORK">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RETAIL_NETWORK"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FULL_NAME" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="online-store">
+        <createTable tableName="STORE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_STORE"/>
+            </column>
+            <column name="NUMBER_" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STORE_TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RETAIL_NETWORK_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ADDRESS_CITY" type="VARCHAR(255)"/>
+            <column name="ADDRESS_STREET" type="VARCHAR(255)"/>
+            <column name="ADDRESS_BUILDING" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="online-store">
+        <addColumn tableName="USER_">
+            <column name="ADDRESS_BUILDING" type="VARCHAR(255)"/>
+            <column name="ADDRESS_CITY" type="VARCHAR(255)"/>
+            <column name="ADDRESS_STREET" type="VARCHAR(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="7" author="online-store">
+        <addColumn tableName="USER_">
+            <column name="DTYPE" type="VARCHAR(31)"/>
+        </addColumn>
+
+        <update tableName="USER_">
+            <column name="DTYPE" value="User"/>
+            <where>DTYPE is null</where>
+        </update>
+    </changeSet>
+    <changeSet id="8" author="online-store">
+        <createIndex indexName="IDX_PRODUCT_STORE" tableName="PRODUCT">
+            <column name="STORE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="STORE_ID" baseTableName="PRODUCT" constraintName="FK_PRODUCT_ON_STORE"
+                                 referencedColumnNames="ID" referencedTableName="STORE"/>
+    </changeSet>
+    <changeSet id="9" author="online-store">
+        <createIndex indexName="IDX_PURCHASE_CUSTOMER" tableName="PURCHASE">
+            <column name="CUSTOMER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CUSTOMER_ID" baseTableName="PURCHASE"
+                                 constraintName="FK_PURCHASE_ON_CUSTOMER" referencedColumnNames="ID"
+                                 referencedTableName="USER_"/>
+    </changeSet>
+    <changeSet id="10" author="online-store">
+        <createIndex indexName="IDX_PURCHASE_PRODUCT_PRODUCT" tableName="PURCHASE_PRODUCT">
+            <column name="PRODUCT_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="PRODUCT_ID" baseTableName="PURCHASE_PRODUCT"
+                                 constraintName="FK_PURCHASE_PRODUCT_ON_PRODUCT" referencedColumnNames="ID"
+                                 referencedTableName="PRODUCT"/>
+    </changeSet>
+    <changeSet id="11" author="online-store">
+        <createIndex indexName="IDX_PURCHASE_PRODUCT_PURCHASE" tableName="PURCHASE_PRODUCT">
+            <column name="PURCHASE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="PURCHASE_ID" baseTableName="PURCHASE_PRODUCT"
+                                 constraintName="FK_PURCHASE_PRODUCT_ON_PURCHASE" referencedColumnNames="ID"
+                                 referencedTableName="PURCHASE"/>
+    </changeSet>
+    <changeSet id="12" author="online-store">
+        <createIndex indexName="IDX_PURCHASE_STORE" tableName="PURCHASE">
+            <column name="STORE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="STORE_ID" baseTableName="PURCHASE"
+                                 constraintName="FK_PURCHASE_ON_STORE" referencedColumnNames="ID"
+                                 referencedTableName="STORE"/>
+    </changeSet>
+    <changeSet id="13" author="online-store">
+        <createIndex indexName="IDX_STORE_RETAIL_NETWORK" tableName="STORE">
+            <column name="RETAIL_NETWORK_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="RETAIL_NETWORK_ID" baseTableName="STORE"
+                                 constraintName="FK_STORE_ON_RETAIL_NETWORK" referencedColumnNames="ID"
+                                 referencedTableName="RETAIL_NETWORK"/>
+    </changeSet>
+</databaseChangeLog>
