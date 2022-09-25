@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://storeStaffEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="storeStaffDc"
+                  class="com.company.onlinestore.entity.StoreStaff">
+            <fetchPlan extends="_base">
+                <property name="store" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="storeDc" property="store"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="storeStaffDc">
+            <column width="350px">
+                <textField id="usernameField" property="username"/>
+                <textField id="firstNameField" property="firstName"/>
+                <textField id="lastNameField" property="lastName"/>
+                <checkBox id="activeField" property="active"/>
+            </column>
+        </form>
+        <groupBox id="storeBox" caption="msg://com.company.onlinestore.entity/StoreStaff.store">
+            <table id="storeTable" dataContainer="storeDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="number"/>
+                    <column id="storeType"/>
+                    <column id="name"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="storeTable.add"/>
+                    <button action="storeTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

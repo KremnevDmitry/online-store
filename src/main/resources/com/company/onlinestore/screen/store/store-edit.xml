@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://storeEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="storeDc"
+                  class="com.company.onlinestore.entity.Store">
+            <fetchPlan extends="_base">
+                <property name="address" fetchPlan="_base"/>
+                <property name="retailNetwork" fetchPlan="_base"/>
+                <property name="product" fetchPlan="_base"/>
+                <property name="storeStaffs" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="productDc" property="product"/>
+            <collection id="storeStaffsDc" property="storeStaffs"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <tabSheet>
+            <tab id="mainTab" caption="msg://mainTab.caption" spacing="true" margin="true" icon="BUILDING">
+                <form id="form" dataContainer="storeDc">
+                    <column width="350px">
+                        <textField id="numberField" property="number"/>
+                        <textField id="addressCityField" property="address.city"/>
+                        <textField id="addressStreetField" property="address.street"/>
+                        <textField id="addressBuildingField" property="address.building"/>
+                        <comboBox id="storeTypeField" property="storeType"/>
+                        <textField id="nameField" property="name"/>
+                        <entityPicker id="retailNetworkField" property="retailNetwork">
+                            <actions>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityClear" type="entity_clear"/>
+                            </actions>
+                        </entityPicker>
+                    </column>
+                </form>
+            </tab>
+            <tab id="productTab" caption="msg://productTab.caption" spacing="true" margin="true" icon="SHOPPING_CART">
+                <groupBox id="productBox" caption="msg://com.company.onlinestore.entity/Store.product">
+                    <table id="productTable" dataContainer="productDc" width="100%" height="200px">
+                        <actions>
+                            <action id="create" type="create">
+                                <properties>
+                                    <property name="openMode" value="DIALOG"/>
+                                </properties>
+                            </action>
+                            <action id="edit" type="edit">
+                                <properties>
+                                    <property name="openMode" value="DIALOG"/>
+                                </properties>
+                            </action>
+                            <action id="remove" type="remove"/>
+                        </actions>
+                        <columns>
+                            <column id="name"/>
+                            <column id="price"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="productTable.create"/>
+                            <button action="productTable.edit"/>
+                            <button action="productTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+            <tab id="storeStaffTab" caption="msg://storeStaffTab.caption" spacing="true" margin="true" icon="ID_CARD">
+                <groupBox id="storeStaffsBox" caption="msg://com.company.onlinestore.entity/Store.storeStaffs">
+                    <table id="storeStaffsTable" dataContainer="storeStaffsDc" width="100%" height="200px">
+                        <actions>
+                            <action id="add" type="add">
+                                <properties>
+                                    <property name="openMode" value="DIALOG"/>
+                                </properties>
+                            </action>
+                            <action id="exclude" type="exclude"/>
+                        </actions>
+                        <columns>
+                            <column id="version"/>
+                            <column id="username"/>
+                            <column id="password"/>
+                            <column id="firstName"/>
+                            <column id="lastName"/>
+                            <column id="active"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="storeStaffsTable.add"/>
+                            <button action="storeStaffsTable.exclude"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+        </tabSheet>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
