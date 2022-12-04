@@ -31,10 +31,6 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="retailNetworksTable" spacing="true">
-        <filter id="filter"
-                dataLoader="retailNetworksDl">
-            <properties include=".*"/>
-        </filter>
         <groupTable id="retailNetworksTable"
                     width="100%"
                     dataContainer="retailNetworksDc"

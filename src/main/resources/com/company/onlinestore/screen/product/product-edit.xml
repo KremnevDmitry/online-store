@@ -29,6 +29,8 @@
             <column width="350px">
                 <textField id="nameField" property="name"/>
                 <textField id="priceField" property="price"/>
+                <textArea id="descriptionField" property="description"/>
+                <textField id="quantityField" property="quantity"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

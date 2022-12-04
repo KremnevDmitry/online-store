@@ -31,9 +31,16 @@
         <form id="form" dataContainer="storeStaffDc">
             <column width="350px">
                 <textField id="usernameField" property="username"/>
+                <passwordField id="passwordField"
+                               caption="msg://com.company.onlinestore.entity/User.password"
+                               required="true"
+                               visible="false"/>
+                <passwordField id="confirmPasswordField"
+                               caption="msg://confirmPassword"
+                               required="true"
+                               visible="false"/>
                 <textField id="firstNameField" property="firstName"/>
                 <textField id="lastNameField" property="lastName"/>
-                <checkBox id="activeField" property="active"/>
             </column>
         </form>
         <groupBox id="storeBox" caption="msg://com.company.onlinestore.entity/StoreStaff.store">

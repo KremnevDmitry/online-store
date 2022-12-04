@@ -53,7 +53,7 @@
             </tab>
             <tab id="productTab" caption="msg://productTab.caption" spacing="true" margin="true" icon="SHOPPING_CART">
                 <groupBox id="productBox" caption="msg://com.company.onlinestore.entity/Store.product">
-                    <table id="productTable" dataContainer="productDc" width="100%" height="200px">
+                    <table id="productTable" dataContainer="productDc" width="100%" minHeight="200px">
                         <actions>
                             <action id="create" type="create">
                                 <properties>
@@ -70,6 +70,7 @@
                         <columns>
                             <column id="name"/>
                             <column id="price"/>
+                            <column id="quantity"/>
                         </columns>
                         <buttonsPanel>
                             <button action="productTable.create"/>
@@ -81,7 +82,7 @@
             </tab>
             <tab id="storeStaffTab" caption="msg://storeStaffTab.caption" spacing="true" margin="true" icon="ID_CARD">
                 <groupBox id="storeStaffsBox" caption="msg://com.company.onlinestore.entity/Store.storeStaffs">
-                    <table id="storeStaffsTable" dataContainer="storeStaffsDc" width="100%" height="200px">
+                    <table id="storeStaffsTable" dataContainer="storeStaffsDc" width="100%" minHeight="200px">
                         <actions>
                             <action id="add" type="add">
                                 <properties>
@@ -91,12 +92,9 @@
                             <action id="exclude" type="exclude"/>
                         </actions>
                         <columns>
-                            <column id="version"/>
                             <column id="username"/>
-                            <column id="password"/>
                             <column id="firstName"/>
                             <column id="lastName"/>
-                            <column id="active"/>
                         </columns>
                         <buttonsPanel>
                             <button action="storeStaffsTable.add"/>

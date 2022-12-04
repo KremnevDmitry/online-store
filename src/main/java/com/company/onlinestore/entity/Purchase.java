@@ -29,9 +29,10 @@ public class Purchase {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Store store;
 
-    @Column(name = "NUMBER_", nullable = false)
     @NotNull
-    private String number;
+    @JmixGeneratedValue
+    @Column(name = "NUMBER_", nullable = false)
+    private Integer number;
 
     @JoinColumn(name = "CUSTOMER_ID", nullable = false)
     @NotNull
@@ -47,6 +48,14 @@ public class Purchase {
     @Composition
     @OneToMany(mappedBy = "purchase")
     private List<PurchaseProduct> purchaseProducts;
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
 
     public PurchaseStatus getStatus() {
         return status == null ? null : PurchaseStatus.fromId(status);
@@ -70,14 +79,6 @@ public class Purchase {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
     }
 
     public Store getStore() {

@@ -1,13 +1,18 @@
 package com.company.onlinestore.screen.login;
 
+import com.company.onlinestore.entity.Customer;
+import com.company.onlinestore.screen.register.RegisterForm;
 import io.jmix.core.MessageTools;
 import io.jmix.core.Messages;
 import io.jmix.securityui.authentication.AuthDetails;
 import io.jmix.securityui.authentication.LoginScreenSupport;
 import io.jmix.ui.JmixApp;
 import io.jmix.ui.Notifications;
+import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.action.Action;
+import io.jmix.ui.builder.AfterScreenCloseEvent;
 import io.jmix.ui.component.*;
+import io.jmix.ui.component.impl.FileResourceImpl;
 import io.jmix.ui.navigation.Route;
 import io.jmix.ui.screen.*;
 import io.jmix.ui.security.UiLoginProperties;
@@ -19,6 +24,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
 
+import java.io.File;
 import java.util.Locale;
 
 @UiController("LoginScreen")
@@ -51,12 +57,11 @@ public class LoginScreen extends Screen {
     private LoginScreenSupport loginScreenSupport;
 
     @Autowired
-    private UiLoginProperties loginProperties;
-
-    @Autowired
     private JmixApp app;
 
     private final Logger log = LoggerFactory.getLogger(LoginScreen.class);
+    @Autowired
+    private ScreenBuilders screenBuilders;
 
     @Subscribe
     private void onInit(InitEvent event) {
@@ -80,19 +85,8 @@ public class LoginScreen extends Screen {
     }
 
     private void initDefaultCredentials() {
-        String defaultUsername = loginProperties.getDefaultUsername();
-        if (!StringUtils.isBlank(defaultUsername) && !"<disabled>".equals(defaultUsername)) {
-            usernameField.setValue(defaultUsername);
-        } else {
             usernameField.setValue("");
-        }
-
-        String defaultPassword = loginProperties.getDefaultPassword();
-        if (!StringUtils.isBlank(defaultPassword) && !"<disabled>".equals(defaultPassword)) {
-            passwordField.setValue(defaultPassword);
-        } else {
             passwordField.setValue("");
-        }
     }
 
     @Subscribe("submit")
@@ -123,5 +117,13 @@ public class LoginScreen extends Screen {
                     .withDescription(messages.getMessage(getClass(), "badCredentials"))
                     .show();
         }
+    }
+
+    @Subscribe("registerButton")
+    public void onRegisterButtonClick(Button.ClickEvent event) {
+        screenBuilders.editor(Customer.class, this)
+                .withScreenClass(RegisterForm.class)
+                .newEntity()
+                .show();
     }
 }

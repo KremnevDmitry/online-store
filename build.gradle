@@ -17,6 +17,13 @@ repositories {
     maven {
         url 'https://nexus.jmix.io/repository/public'
     }
+    maven {
+        url = 'https://nexus.jmix.io/repository/premium'
+        credentials {
+            username = rootProject['premiumRepoUser']
+            password = rootProject['premiumRepoPass']
+        }
+    }
 }
 
 dependencies {
@@ -40,6 +47,8 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     implementation 'org.postgresql:postgresql'
+    implementation 'io.jmix.bpm:jmix-bpm-ui-starter'
+    implementation 'io.jmix.bpm:jmix-bpm-starter'
 }
 
 test {

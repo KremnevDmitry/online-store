@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://storeBrowse.caption"
-        focusComponent="storesTable">
+        caption="msg://productBrowse.caption"
+        focusComponent="productsTable">
     <data readOnly="true">
-        <collection id="storesDc"
-                    class="com.company.onlinestore.entity.Store">
+        <collection id="productsDc"
+                    class="com.company.onlinestore.entity.Product">
             <fetchPlan extends="_base"/>
-            <loader id="storesDl">
-            </loader>
         </collection>
     </data>
     <facets>
@@ -27,27 +25,20 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="storesTable" spacing="true">
-        <groupTable id="storesTable"
+    <layout expand="productsTable" spacing="true">
+        <groupTable id="productsTable"
                     width="100%"
-                    dataContainer="storesDc"
-                    multiselect="true">
+                    dataContainer="productsDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
             </actions>
             <columns>
                 <column id="name"/>
-                <column id="storeType"/>
-                <column id="number"/>
+                <column id="price"/>
+                <column id="quantity"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="storesTable.create"/>
-                <button id="editBtn" action="storesTable.edit"/>
-                <button id="removeBtn" action="storesTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

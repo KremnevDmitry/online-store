@@ -28,8 +28,8 @@ public class StoreStaff extends User {
     }
 
     @InstanceName
-    @DependsOnProperties({"username", "firstName", "lastName"})
+    @DependsOnProperties({"firstName", "lastName"})
     public String getInstanceName() {
-        return String.format("%s %s %s", getUsername(), getFirstName(), getLastName());
+        return String.format("%s %s", getFirstName(), getLastName());
     }
 }

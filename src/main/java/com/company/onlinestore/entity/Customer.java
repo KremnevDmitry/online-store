@@ -6,10 +6,12 @@ import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @JmixEntity
 @Entity
 public class Customer extends User {
+    @NotNull
     @EmbeddedParameters(nullAllowed = false)
     @Embedded
     @AttributeOverrides({
@@ -28,8 +30,8 @@ public class Customer extends User {
     }
 
     @InstanceName
-    @DependsOnProperties({"username", "firstName", "lastName"})
+    @DependsOnProperties({"firstName", "lastName"})
     public String getInstanceName() {
-        return String.format("%s %s %s", getUsername(), getFirstName(), getLastName());
+        return String.format("%s %s", getFirstName(), getLastName());
     }
 }

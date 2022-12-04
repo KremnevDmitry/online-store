@@ -1,6 +1,8 @@
 package com.company.onlinestore.entity;
 
+import io.jmix.core.DeletePolicy;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
@@ -8,6 +10,7 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @JmixEntity
@@ -23,6 +26,10 @@ public class PurchaseProduct {
     private UUID id;
 
     @NotNull
+    @Column(name = "PRICE")
+    private BigDecimal price;
+
+    @NotNull
     @Positive
     @Column(name = "AMOUNT", nullable = false)
     private Integer amount;
@@ -32,9 +39,18 @@ public class PurchaseProduct {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Product product;
 
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     @JoinColumn(name = "PURCHASE_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Purchase purchase;
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
 
     public Purchase getPurchase() {
         return purchase;

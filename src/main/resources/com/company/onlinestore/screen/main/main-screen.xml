@@ -1,22 +1,21 @@
 <window xmlns="http://jmix.io/schema/ui/window"
         caption="msg://application.caption">
-
     <layout>
         <cssLayout id="horizontalWrap"
                    stylename="jmix-drawer-layout">
             <drawer id="drawer" expandOnHover="true">
+                <image id="logoImage"
+                       stylename="app-icon"
+                       scaleMode="SCALE_DOWN">
+                    <resource>
+                        <file path="C:\Users\Kremnev\IdeaProjects\online-store\src\main\resources\com\company\onlinestore\logo\logo.svg"/>
+                    </resource>
+                </image>
                 <cssLayout id="appTitleBox"
                            stylename="jmix-drawer-header"
                            width="100%">
-                    <image id="logoImage"
-                           stylename="app-icon"
-                           scaleMode="SCALE_DOWN">
-                        <resource>
-                            <theme path="branding/app-icon-menu.svg"/>
-                        </resource>
-                    </image>
                     <label id="appTitleLabel"
-                           stylename="app-title"
+                           stylename="app-title h2"
                            value="msg://application.logoLabel"/>
                 </cssLayout>
                 <sideMenu id="sideMenu"

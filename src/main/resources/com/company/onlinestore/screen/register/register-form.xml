@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://registerForm.caption"
+        focusComponent="form">
+    <data>
+        <instance id="customerDc"
+                  class="com.company.onlinestore.entity.Customer">
+            <fetchPlan extends="_base">
+                <property name="address" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout spacing="true" expand="formBox">
+        <vbox id="formBox" spacing="true">
+            <form id="form" dataContainer="customerDc">
+                <column width="350px">
+                    <label value="msg://registerForm.general" stylename="h2 bold"/>
+                    <textField id="usernameField" property="username"/>
+                    <passwordField id="passwordField"
+                                   caption="msg://com.company.onlinestore.entity/User.password"
+                                   required="true"
+                                   visible="false"/>
+                    <passwordField id="confirmPasswordField"
+                                   caption="msg://confirmPassword"
+                                   required="true"
+                                   visible="false"/>
+                    <checkBox id="activeField" property="active" visible="false"/>
+                    <textField id="firstNameField" property="firstName"/>
+                    <textField id="lastNameField" property="lastName"/>
+                    <label value="msg://registerForm.address" stylename="h2 bold"/>
+                    <textField id="addressCityField" property="address.city" required="true"/>
+                    <textField id="addressStreetField" property="address.street" required="true"/>
+                    <textField id="addressBuildingField" property="address.building" required="true"/>
+                </column>
+            </form>
+        </vbox>
+        <hbox id="editActions" spacing="true" align="MIDDLE_CENTER">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

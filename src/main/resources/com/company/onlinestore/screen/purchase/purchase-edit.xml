@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://purchaseEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="purchaseDc"
+                  class="com.company.onlinestore.entity.Purchase">
+            <fetchPlan extends="_base">
+                <property name="store" fetchPlan="_base"/>
+                <property name="customer" fetchPlan="_base"/>
+                <property name="purchaseProducts" fetchPlan="_base">
+                    <property name="purchase" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader/>
+            <collection id="purchaseProductsDc" property="purchaseProducts"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="purchaseDc">
+            <column width="350px">
+                <entityPicker id="storeField" property="store">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <textField id="numberField" property="number" editable="false">
+                    <formatter>
+                        <number format="#"/>
+                    </formatter>
+                </textField>
+                <entityPicker id="customerField" property="customer" editable="false">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <textField id="priceField" property="price" editable="false"/>
+                <comboBox id="statusField" property="status" editable="false"/>
+            </column>
+        </form>
+        <groupBox id="purchaseProductsBox" caption="msg://com.company.onlinestore.entity/Purchase.purchaseProducts">
+            <table id="purchaseProductsTable" dataContainer="purchaseProductsDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="product"/>
+                    <column id="price"/>
+                    <column id="amount"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="purchaseProductsTable.create"/>
+                    <button action="purchaseProductsTable.edit"/>
+                    <button action="purchaseProductsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

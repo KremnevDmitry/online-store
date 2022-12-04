@@ -10,6 +10,7 @@ import io.jmix.security.authentication.JmixUserDetails;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
@@ -35,18 +36,21 @@ public class User implements JmixUserDetails {
     @Column(name = "USERNAME", nullable = false)
     protected String username;
 
+    @NotNull
     @Size(min = 4, max = 10)
     @Secret
     @SystemLevel
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     protected String password;
 
+    @NotNull
     @Size(min = 4, max = 30)
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FIRST_NAME", nullable = false)
     protected String firstName;
 
+    @NotNull
     @Size(min = 4, max = 30)
-    @Column(name = "LAST_NAME")
+    @Column(name = "LAST_NAME", nullable = false)
     protected String lastName;
 
     @Column(name = "ACTIVE")

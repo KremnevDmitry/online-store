@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://jmix.io/schema/ui/menu">
 
-    <menu id="application" caption="msg://com.company.onlinestore/menu.application" insertBefore="administration">
-        <item screen="User.browse" caption="msg://com.company.onlinestore.screen.user/UserBrowse.caption"/>
-        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
-        <item screen="RetailNetwork.browse"
-              caption="msg://com.company.onlinestore.screen.retailnetwork/retailNetworkBrowse.menu"/>
-        <item screen="Store.browse" caption="msg://com.company.onlinestore.screen.store/storeBrowse.menu"/>
-        <item screen="StoreStaff.browse"
-              caption="msg://com.company.onlinestore.screen.storestaff/storeStaffBrowse.menu"/>
-    </menu>
+    <item screen="bpm_MyTasks.browse" id="myTasks" caption="msg://com.company.onlinestore/menu_config.myTasks"
+          insertAfter="administration" icon="BOOKMARK"/>
+    <item screen="StoreStaff.browse" caption="msg://com.company.onlinestore.screen.storestaff/storeStaffBrowse.menu"
+          icon="font-icon:USER" insertAfter="administration"/>
+    <item screen="User.browse" caption="msg://com.company.onlinestore.screen.user/UserBrowse.caption" icon="USERS"
+          insertBefore="themeSettingsScreen"/>
+    <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"
+          icon="font-icon:PAINT_BRUSH" insertBefore="RetailNetwork.browse"/>
+    <item screen="RetailNetwork.browse"
+          caption="msg://com.company.onlinestore.screen.retailnetwork/retailNetworkBrowse.menu"
+          icon="font-icon:SHOPPING_CART" insertBefore="Store.browse"/>
+    <item screen="Store.browse" caption="msg://com.company.onlinestore.screen.store/storeBrowse.menu"
+          icon="font-icon:BUILDING" insertBefore="Store.browse"/>
+    <item screen="Purchase.browse" caption="msg://com.company.onlinestore.screen.purchase/purchaseBrowse.menu"
+          icon="font-icon:SHOPPING_BASKET"/>
 
 </menu-config>

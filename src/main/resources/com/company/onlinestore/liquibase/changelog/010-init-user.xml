@@ -44,6 +44,8 @@
             <column name="USERNAME" value="admin"/>
             <column name="PASSWORD" value="{noop}admin"/>
             <column name="ACTIVE" valueBoolean="true"/>
+            <column name="FIRST_NAME" value="admin"/>
+            <column name="LAST_NAME" value="admin"/>
         </insert>
 
         <insert tableName="USER_" dbms="oracle, mysql, mariadb">

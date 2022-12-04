@@ -6,6 +6,7 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @JmixEntity
@@ -19,18 +20,49 @@ public class Product {
     @Id
     private UUID id;
 
+    @Column(name = "DESCRIPTION")
+    private String description;
+
+    @NotNull
+    @Column(name = "QUANTITY")
+    private Integer quantity;
+
     @InstanceName
     @Column(name = "NAME", nullable = false)
     @NotNull
     private String name;
 
-    @Column(name = "PRICE", nullable = false)
     @NotNull
-    private String price;
+    @Column(name = "PRICE", nullable = false)
+    private BigDecimal price;
 
     @JoinColumn(name = "STORE_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Store store;
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Store getStore() {
         return store;
@@ -38,14 +70,6 @@ public class Product {
 
     public void setStore(Store store) {
         this.store = store;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public String getName() {

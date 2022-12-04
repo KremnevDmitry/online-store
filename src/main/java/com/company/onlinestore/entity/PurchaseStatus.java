@@ -15,7 +15,6 @@ public enum PurchaseStatus implements EnumClass<String> {
     AWAITING_SHIPMENT("Awaiting shipment"),
     SENTED("Sented"),
     DELIVERED("Delivered"),
-    READY_ISSUE("Ready to issue"),
     CANCELED("Candeled"),
     COMPLETED("Completed");
 

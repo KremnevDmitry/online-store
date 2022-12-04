@@ -6,6 +6,9 @@
                 caption="msg://loginButton"
                 icon="CHECK"
                 shortcut="ENTER"/>
+        <action id="register"
+                caption="msg://registerButton"
+                icon="PENCIL"/>
     </actions>
 
     <layout stylename="jmix-login-main-layout">
@@ -16,6 +19,16 @@
                   spacing="true"
                   stylename="jmix-login-panel"
                   width="AUTO">
+                <image id="logoImage"
+                       align="MIDDLE_CENTER"
+                       height="AUTO"
+                       scaleMode="FILL"
+                       stylename="jmix-login-logo"
+                       width="64px">
+                    <resource>
+                            <file path="C:\Users\Kremnev\IdeaProjects\online-store\src\main\resources\com\company\onlinestore\logo\logo.svg"/>
+                    </resource>
+                </image>
                 <label id="welcomeLabel"
                        align="MIDDLE_CENTER"
                        stylename="jmix-login-caption"
@@ -44,12 +57,17 @@
                         <comboBox id="localesField"
                                   nullOptionVisible="false"
                                   stylename="jmix-login-locale"
-                                  textInputAllowed="false"/>
+                                  textInputAllowed="false"
+                                  visible="false"/>
                     </hbox>
 
                     <button id="loginButton"
                             align="MIDDLE_CENTER"
                             action="submit"
+                            stylename="jmix-login-submit-button"/>
+                    <button id="registerButton"
+                            align="MIDDLE_CENTER"
+                            action="register"
                             stylename="jmix-login-submit-button"/>
                 </vbox>
             </vbox>

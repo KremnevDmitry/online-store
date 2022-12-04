@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://storeBrowse.caption"
-        focusComponent="storesTable">
+        caption="msg://purchaseBrowse.caption"
+        focusComponent="purchasesTable">
     <data readOnly="true">
-        <collection id="storesDc"
-                    class="com.company.onlinestore.entity.Store">
-            <fetchPlan extends="_base"/>
-            <loader id="storesDl">
+        <collection id="purchasesDc"
+                    class="com.company.onlinestore.entity.Purchase">
+            <fetchPlan extends="_base">
+                <property name="store" fetchPlan="_base"/>
+                <property name="customer" fetchPlan="_base"/>
+                <property name="purchaseProducts" fetchPlan="_base">
+                    <property name="purchase" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader id="purchasesDl">
+                <query>
+                    <![CDATA[select e from Purchase e]]>
+                </query>
             </loader>
         </collection>
     </data>
@@ -27,10 +36,10 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="storesTable" spacing="true">
-        <groupTable id="storesTable"
+    <layout expand="purchasesTable" spacing="true">
+        <groupTable id="purchasesTable"
                     width="100%"
-                    dataContainer="storesDc"
+                    dataContainer="purchasesDc"
                     multiselect="true">
             <actions>
                 <action id="create" type="create"/>
@@ -38,16 +47,18 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="name"/>
-                <column id="storeType"/>
+                <column id="store"/>
                 <column id="number"/>
+                <column id="customer"/>
+                <column id="price"/>
+                <column id="status"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="storesTable.create"/>
-                <button id="editBtn" action="storesTable.edit"/>
-                <button id="removeBtn" action="storesTable.remove"/>
+                <button id="createBtn" action="purchasesTable.create"/>
+                <button id="editBtn" action="purchasesTable.edit"/>
+                <button id="removeBtn" action="purchasesTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
