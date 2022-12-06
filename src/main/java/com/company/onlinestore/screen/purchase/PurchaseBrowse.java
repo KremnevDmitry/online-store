@@ -3,6 +3,8 @@ package com.company.onlinestore.screen.purchase;
 import com.company.onlinestore.entity.*;
 import io.jmix.core.DataManager;
 import io.jmix.core.security.CurrentAuthentication;
+import io.jmix.ui.component.Button;
+import io.jmix.ui.component.GroupTable;
 import io.jmix.ui.model.CollectionLoader;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class PurchaseBrowse extends StandardLookup<Purchase> {
     private DataManager dataManager;
 
     protected boolean load = false;
+    @Autowired
+    private GroupTable<Purchase> purchasesTable;
 
     @Subscribe
     public void onInit(InitEvent event) {
